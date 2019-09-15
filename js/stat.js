@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-window.renderStatistics = function (ctx, names, times) {
+window.renderStatistics = function(ctx, names, times) {
   var dataCloud = {
     coordinatesCloud: [100, 10],
     heightRect: 270,
@@ -17,45 +17,27 @@ window.renderStatistics = function (ctx, names, times) {
     barY: 240,
     colorRect: ['rgba(0, 0, 0, 0.7)', 'rgb(256, 256, 256)'],
     colorText: '#000',
-    fontText: "16px PT Mono",
+    fontText: '16px PT Mono',
     text: ['Ура! Вы победили!', 'Список результатов: ']
   };
 
-  renderCloud (
-    dataCloud.coordinatesCloud[0] + dataCloud.lenghtShadow,
-    dataCloud.coordinatesCloud[1] + dataCloud.lenghtShadow,
-    dataCloud.widthRect,
-    dataCloud.heightRect,
-    dataCloud.colorRect[0]
-  );
-
-  renderCloud (
-    dataCloud.coordinatesCloud[0],
-    dataCloud.coordinatesCloud[1],
-    dataCloud.widthRect,
-    dataCloud.heightRect,
-    dataCloud.colorRect[1]
-  );
-
+  renderCloud(dataCloud.coordinatesCloud[0] + dataCloud.lenghtShadow, dataCloud.coordinatesCloud[1] + dataCloud.lenghtShadow, dataCloud.widthRect, ataCloud.heightRect, dataCloud.colorRect[0]);
+  renderCloud (dataCloud.coordinatesCloud[0], dataCloud.coordinatesCloud[1], dataCloud.widthRect, dataCloud.heightRect, dataCloud.colorRect[1]);
   renderText (dataCloud.text);
 
-  function renderCloud (X, Y, width, height, colorRect) {
+  function renderCloud(X, Y, width, height, colorRect) {
     ctx.fillStyle = colorRect;
     ctx.fillRect(X, Y, width, height);
   }
 
-  function renderText (textArray) {
+  function renderText(textArray) {
     ctx.fillStyle = dataCloud.colorText;
     ctx.font = dataCloud.fontText;
 
     for (var i = 0; i < textArray.length; i++) {
       var gapY = i ? 25 : 30;
 
-      ctx.fillText (
-        textArray[i],
-        dataCloud.coordinatesCloud[0] + dataCloud.marginX,
-        dataCloud.coordinatesCloud[1] + (i + 1) * gapY
-      );
+      ctx.fillText (textArray[i], dataCloud.coordinatesCloud[0] + dataCloud.marginX, dataCloud.coordinatesCloud[1] + (i + 1) * gapY);
     }
   }
 
@@ -68,13 +50,13 @@ window.renderStatistics = function (ctx, names, times) {
       return rand;
     };
 
-    for (var i = 0; i < names.length; i++) {
+    for (var j = 0; j < names.length; j++) {
       var randomColor = 'rgb( 0, 0, ' + getRandom(50, 255) + ')';
       ctx.fillStyle = '#000';
-      ctx.fillText(names[i], dataCloud.textX + (dataCloud.widthBar + dataCloud.gap) * i, dataCloud.textY);
-      ctx.fillText(Math.round(times[i]), dataCloud.textX + (dataCloud.widthBar + dataCloud.gap) * i, (dataCloud.barY - dataCloud.cloudGap - (times[i] * dataCloud.maxHeightBar / maxTime)));
-      ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
-      ctx.fillRect(dataCloud.barX + (dataCloud.widthBar + dataCloud.gap) * i, dataCloud.barY, dataCloud.widthBar, -(times[i] * dataCloud.maxHeightBar / maxTime));
+      ctx.fillText(names[j], dataCloud.textX + (dataCloud.widthBar + dataCloud.gap) * j, dataCloud.textY);
+      ctx.fillText(Math.round(times[j]), dataCloud.textX + (dataCloud.widthBar + dataCloud.gap) * j, (dataCloud.barY - dataCloud.cloudGap - (times[j] * dataCloud.maxHeightBar / maxTime)));
+      ctx.fillStyle = (names[j] === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
+      ctx.fillRect(dataCloud.barX + (dataCloud.widthBar + dataCloud.gap) * j, dataCloud.barY, dataCloud.widthBar, -(times[j] * dataCloud.maxHeightBar / maxTime));
     }
   }
-}
+};
