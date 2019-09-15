@@ -1,6 +1,6 @@
 'use strict';
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   var dataCloud = {
     coordinatesCloud: [100, 10],
     heightRect: 270,
@@ -21,9 +21,9 @@ window.renderStatistics = function(ctx, names, times) {
     text: ['Ура! Вы победили!', 'Список результатов: ']
   };
 
-  renderCloud(dataCloud.coordinatesCloud[0] + dataCloud.lenghtShadow, dataCloud.coordinatesCloud[1] + dataCloud.lenghtShadow, dataCloud.widthRect, ataCloud.heightRect, dataCloud.colorRect[0]);
-  renderCloud (dataCloud.coordinatesCloud[0], dataCloud.coordinatesCloud[1], dataCloud.widthRect, dataCloud.heightRect, dataCloud.colorRect[1]);
-  renderText (dataCloud.text);
+  renderCloud(dataCloud.coordinatesCloud[0] + dataCloud.lenghtShadow, dataCloud.coordinatesCloud[1] + dataCloud.lenghtShadow, dataCloud.widthRect, dataCloud.heightRect, dataCloud.colorRect[0]);
+  renderCloud(dataCloud.coordinatesCloud[0], dataCloud.coordinatesCloud[1], dataCloud.widthRect, dataCloud.heightRect, dataCloud.colorRect[1]);
+  renderText(dataCloud.text);
 
   function renderCloud(X, Y, width, height, colorRect) {
     ctx.fillStyle = colorRect;
@@ -37,7 +37,7 @@ window.renderStatistics = function(ctx, names, times) {
     for (var i = 0; i < textArray.length; i++) {
       var gapY = i ? 25 : 30;
 
-      ctx.fillText (textArray[i], dataCloud.coordinatesCloud[0] + dataCloud.marginX, dataCloud.coordinatesCloud[1] + (i + 1) * gapY);
+      ctx.fillText(textArray[i], dataCloud.coordinatesCloud[0] + dataCloud.marginX, dataCloud.coordinatesCloud[1] + (i + 1) * gapY);
     }
   }
 
