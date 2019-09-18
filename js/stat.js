@@ -40,12 +40,15 @@ window.renderStatistics = function (ctx, names, times) {
     }
   }
 
+  var getRandomColor = function (arr) {
+    return arr[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'rgb( 0, 0, ' + (Math.floor(Math.random() * 255)) + ')';
+  };
+
   for (var i = 0; i < names.length; i++) {
-    var getRandomColor = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'rgb( 0, 0, ' + (Math.floor(Math.random() * 255)) + ')';
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], textX + (widthBar + gap) * i, textY);
     ctx.fillText(Math.round(times[i]), textX + (widthBar + gap) * i, (barY - cloudGap - (times[i] * maxHeightBar / maxTime)));
-    ctx.fillStyle = getRandomColor;
+    ctx.fillStyle = getRandomColor(names);
     ctx.fillRect(barX + (widthBar + gap) * i, barY, widthBar, -(times[i] * maxHeightBar / maxTime));
   }
 };
