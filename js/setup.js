@@ -1,15 +1,5 @@
 'use strict';
 
-let setup = document.querySelector('.setup');
-setup.classList.remove('hidden');
-
-let setupSimilar = document.querySelector('.setup-similar');
-setupSimilar.classList.remove('hidden');
-
-let similarListElement = setupSimilar.querySelector('.setup-similar-list');
-let similarWizardTemplate = document.querySelector('#similar-wizard-template')
-  .content.querySelector('.setup-similar-item');
-
 const NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -56,6 +46,16 @@ const FIREBALL_COLORS = [
   '#e848d5',
   '#e6e848'
 ];
+
+let setup = document.querySelector('.setup');
+setup.classList.remove('hidden');
+
+let setupSimilar = document.querySelector('.setup-similar');
+setupSimilar.classList.remove('hidden');
+
+let similarListElement = setupSimilar.querySelector('.setup-similar-list');
+let similarWizardTemplate = document.querySelector('#similar-wizard-template')
+  .content.querySelector('.setup-similar-item');
 
 function getRandomElement (arr) {
   return arr[Math.floor(arr.length * Math.random())];
