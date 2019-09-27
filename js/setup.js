@@ -98,8 +98,9 @@ function renderAllWizards(wizards) {
 similarListElement.appendChild(renderAllWizards(createWizards(4)));
 
 
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 'Escape';
+var ENTER_KEYCODE = 'Enter';
+var NUMPAD_ENTER_KEYCODE = 'NumpadEnter';
 
 var SETUP_OPEN = document.querySelector('.setup-open');
 var SETUP_CLOSE = setup.querySelector('.setup-close');
@@ -124,25 +125,25 @@ function closeSetup() {
 }
 
 function onSetupEscPress(e) {
-  if (e.keyCode === ESC_KEYCODE) {
+  if (e.code === ESC_KEYCODE) {
     closeSetup();
   }
 }
 
 SETUP_OPEN.addEventListener('keydown', function (e) {
-  if (e.keyCode === ENTER_KEYCODE) {
+  if (e.code === ENTER_KEYCODE || NUMPAD_ENTER_KEYCODE) {
     openSetup();
   }
 });
 
 SETUP_CLOSE.addEventListener('keydown', function (e) {
-  if (e.keyCode === ENTER_KEYCODE) {
+  if (e.code === ENTER_KEYCODE || NUMPAD_ENTER_KEYCODE) {
     closeSetup();
   }
 });
 
 SETUP_USER_NAME.addEventListener('keydown', function (e) {
-  if (e.keyCode === ESC_KEYCODE) {
+  if (e.code === ESC_KEYCODE) {
     e.stopPropagation();
   }
 });
@@ -184,3 +185,25 @@ function changeFireballColor() {
   setupFireballWrap.style.backgroundColor = fireballColor;
   fireballColorInput.value = fireballColor;
 }
+
+
+SETUP_USER_NAME.addEventListener('invalid', function () {
+  if (SETUP_USER_NAME.validity.tooShort) {
+    SETUP_USER_NAME.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (SETUP_USER_NAME.validity.tooLong) {
+    SETUP_USER_NAME.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (SETUP_USER_NAME.validity.valueMissing) {
+    SETUP_USER_NAME.setCustomValidity('Обязательное поле');
+  } else {
+    SETUP_USER_NAME.setCustomValidity('');
+  }
+});
+
+SETUP_USER_NAME.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else {
+    target.setCustomValidity('');
+  }
+});
