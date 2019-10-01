@@ -47,6 +47,9 @@ var FIREBALL_COLORS = [
   '#e6e848'
 ];
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 var setup = document.querySelector('.setup');
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
@@ -54,6 +57,10 @@ setupSimilar.classList.remove('hidden');
 var similarListElement = setupSimilar.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content.querySelector('.setup-similar-item');
+
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var setupUserName = setup.querySelector('.setup-user-name');
 
 function getRandomElement(arr) {
   return arr[Math.floor(arr.length * Math.random())];
@@ -94,18 +101,11 @@ function renderAllWizards(wizards) {
 
 similarListElement.appendChild(renderAllWizards(createWizards(4)));
 
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
-
-var SETUP_OPEN = document.querySelector('.setup-open');
-var SETUP_CLOSE = setup.querySelector('.setup-close');
-var SETUP_USER_NAME = setup.querySelector('.setup-user-name');
-
-SETUP_OPEN.addEventListener('click', function () {
+setupOpen.addEventListener('click', function () {
   openSetup();
 });
 
-SETUP_CLOSE.addEventListener('click', function () {
+setupClose.addEventListener('click', function () {
   closeSetup();
 });
 
@@ -124,20 +124,19 @@ function onSetupEscPress(e) {
     closeSetup();
   }
 }
-
-SETUP_OPEN.addEventListener('keydown', function (e) {
+setupOpen.addEventListener('keydown', function (e) {
   if (e.keyCode === ENTER_KEYCODE) {
     openSetup();
   }
 });
 
-SETUP_CLOSE.addEventListener('keydown', function (e) {
+setupClose.addEventListener('keydown', function (e) {
   if (e.keyCode === ENTER_KEYCODE) {
     closeSetup();
   }
 });
 
-SETUP_USER_NAME.addEventListener('keydown', function (e) {
+setupUserName.addEventListener('keydown', function (e) {
   if (e.keyCode === ESC_KEYCODE) {
     e.stopPropagation();
   }
@@ -181,22 +180,12 @@ function changeFireballColor() {
   fireballColorInput.value = fireballColor;
 }
 
-SETUP_USER_NAME.addEventListener('invalid', function () {
-  if (SETUP_USER_NAME.validity.tooShort) {
-    SETUP_USER_NAME.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (SETUP_USER_NAME.validity.tooLong) {
-    SETUP_USER_NAME.setCustomValidity('Имя не должно превышать 25-ти символов');
-  } else if (SETUP_USER_NAME.validity.valueMissing) {
-    SETUP_USER_NAME.setCustomValidity('Обязательное поле');
-  } else {
-    SETUP_USER_NAME.setCustomValidity('');
-  }
-});
-
-SETUP_USER_NAME.addEventListener('input', function (evt) {
-  var target = evt.target;
+setupUserName.addEventListener('input', function (e) {
+  var target = e.target;
   if (target.value.length < 2) {
     target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (target.value.length > 20) {
+    target.setCustomValidity('Максимальная длина имени персонажа — 25 символов');
   } else {
     target.setCustomValidity('');
   }
