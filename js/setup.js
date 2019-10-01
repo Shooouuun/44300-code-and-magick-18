@@ -48,7 +48,6 @@ var FIREBALL_COLORS = [
 ];
 
 var setup = document.querySelector('.setup');
-
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
 
@@ -59,8 +58,6 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
 function getRandomElement(arr) {
   return arr[Math.floor(arr.length * Math.random())];
 }
-
-// Генерация блока похожих персонажей
 
 function createWizards(num) {
   var wizards = [];
@@ -97,10 +94,8 @@ function renderAllWizards(wizards) {
 
 similarListElement.appendChild(renderAllWizards(createWizards(4)));
 
-
-var ESC_KEYCODE = 'Escape';
-var ENTER_KEYCODE = 'Enter';
-var NUMPAD_ENTER_KEYCODE = 'NumpadEnter';
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 var SETUP_OPEN = document.querySelector('.setup-open');
 var SETUP_CLOSE = setup.querySelector('.setup-close');
@@ -125,25 +120,25 @@ function closeSetup() {
 }
 
 function onSetupEscPress(e) {
-  if (e.code === ESC_KEYCODE) {
+  if (e.keyCode === ESC_KEYCODE) {
     closeSetup();
   }
 }
 
 SETUP_OPEN.addEventListener('keydown', function (e) {
-  if (e.code === ENTER_KEYCODE || NUMPAD_ENTER_KEYCODE) {
+  if (e.keyCode === ENTER_KEYCODE) {
     openSetup();
   }
 });
 
 SETUP_CLOSE.addEventListener('keydown', function (e) {
-  if (e.code === ENTER_KEYCODE || NUMPAD_ENTER_KEYCODE) {
+  if (e.keyCode === ENTER_KEYCODE) {
     closeSetup();
   }
 });
 
 SETUP_USER_NAME.addEventListener('keydown', function (e) {
-  if (e.code === ESC_KEYCODE) {
+  if (e.keyCode === ESC_KEYCODE) {
     e.stopPropagation();
   }
 });
@@ -185,7 +180,6 @@ function changeFireballColor() {
   setupFireballWrap.style.backgroundColor = fireballColor;
   fireballColorInput.value = fireballColor;
 }
-
 
 SETUP_USER_NAME.addEventListener('invalid', function () {
   if (SETUP_USER_NAME.validity.tooShort) {
