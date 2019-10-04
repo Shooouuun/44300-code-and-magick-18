@@ -50,6 +50,8 @@ var FIREBALL_COLORS = [
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
+var DEALS = 4;
+
 var setup = document.querySelector('.setup');
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
@@ -99,7 +101,7 @@ function renderAllWizards(wizards) {
   return fragment;
 }
 
-similarListElement.appendChild(renderAllWizards(createWizards(4)));
+similarListElement.appendChild(renderAllWizards(createWizards(DEALS)));
 
 setupOpen.addEventListener('click', function () {
   openSetup();
@@ -184,7 +186,7 @@ setupUserName.addEventListener('input', function (e) {
   var target = e.target;
   if (target.value.length < 2) {
     target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (target.value.length > 20) {
+  } else if (target.value.length > 25) {
     target.setCustomValidity('Максимальная длина имени персонажа — 25 символов');
   } else {
     target.setCustomValidity('');
